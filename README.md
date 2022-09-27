@@ -12,7 +12,7 @@
 - Afirmar y conectar los conceptos aprendidos en la carrera.
 - Aprender mejores prácticas.
 - Aprender y practicar el workflow de GIT.
-- Usar y practicar testing.
+- Usar y practicar testing.s
 
 ## Horarios y Fechas
 

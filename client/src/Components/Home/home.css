@@ -1,0 +1,109 @@
+* {
+    margin:0;
+    box-sizing: border-box;
+}
+.homeBody{
+    font-family: sans-serif;
+    padding: 6% 5% 0;
+    background-image:url('https://img.freepik.com/foto-gratis/mapa-mundo-acuarela-blanco-negro_125540-1563.jpg?w=2000');
+    overflow: hidden;
+    height: 100vh;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+}
+
+.SearchHeader{
+    background-color: rgb(5, 2, 85);
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.homeSelect{
+    margin-left: 2px;
+    margin-right: 38px;
+    appearance: none;
+    display: inline-block;
+    align-items: flex-start;
+	width: 17%;
+	cursor: pointer;
+  	padding: 7px 10px;
+  	height: 42px;
+	border-radius: 0;
+	background:  rgba(5, 2, 85, 0.531);
+	color: #ffffff;
+	font-size: 1em;
+	color: rgb(255, 255, 255);
+	font-family: 
+	'Quicksand', sans-serif;
+	border:2px solid rgba(0,0,0,0.2);
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.25s ease;
+}
+.homeSelectBottom:hover{
+	background: rgba(250, 233, 0, 0.785);
+    
+}
+.listCountriesHome{
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px ;
+    float: left;
+    padding-bottom: 0;
+    margin: 15px 0;
+    width: 100%;
+    list-style: none;
+
+}
+.itemCountryHome{
+        padding-right: 2px;
+        display: inline;
+        padding-left: 2px;
+        float: left;
+        padding-bottom: 2px;
+        width: 20%;
+        padding-top: 2px;
+}
+
+.footerHome{
+    width:100%; 
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.paginadoHome{
+padding-bottom: 10%;
+}
+
+.homeRemoveCountry{
+    
+    width: 30px;
+    height: 25px;
+    font-family: sans-serif;
+    background-color:rgb(201, 0, 0);
+    color: rgb(255, 255, 255);;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    border-radius: 10px;
+    margin-left: 195px;
+    margin-right: 10px;
+    margin-top: -10px;
+    float: right;
+}
+
+
+
+@media (max-width: 768px){
+    .body{
+        padding: 9% 5% 0;
+    }
+    .SearchHeader{
+        height: 60px;
+    }
+}

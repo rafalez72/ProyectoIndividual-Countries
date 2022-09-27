@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('country', {
+  sequelize.define('favorites', {
     id:{
       type:DataTypes.STRING,  //Va a ser ccn3 de  la api
       primaryKey:true,

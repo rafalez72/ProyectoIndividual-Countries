@@ -1,0 +1,30 @@
+.lista{
+    list-style: none;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 10px 0 10px;
+    margin-top: 2%;
+    margin-right: 2%;
+}
+
+.elementoLista{
+    padding: 5px;
+}
+
+.botonLista{
+    width: 35px;
+    background: transparent;
+    color: rgb(5, 2, 85);;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    border-radius: 5px;
+
+}
+.botonLista:hover{
+    background:rgb(5, 2, 85);
+    color: antiquewhite;
+}

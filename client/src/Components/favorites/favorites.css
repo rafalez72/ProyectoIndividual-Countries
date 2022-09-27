@@ -1,0 +1,103 @@
+.favoriteBody{
+    font-family: sans-serif;
+    padding: 6% 5% 0;
+    background-image:url('https://img.freepik.com/foto-gratis/mapa-mundo-acuarela-blanco-negro_125540-1563.jpg?w=2000');
+    overflow: hidden;
+    height: 100vh;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    overflow-y: auto;
+}
+
+.favoritesHeader{
+    background-color: rgb(5, 2, 85);
+    height: 80px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.favoritesDiv{
+    display: absolute;
+    align-items: center;
+    justify-content: center;
+}
+.favoritesButtom{
+    
+    width: 100px;
+    height: 30px;
+    font-family: sans-serif;
+    background-color:rgb(5, 2, 85);
+    color: rgb(255, 255, 255);;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    border-radius: 10px;
+    margin-left: 640px;
+    margin-top: 10px;
+}
+.favoritesH1{
+    text-align: center;
+    background-color:rgba(5, 2, 85, 0.531);
+    color: rgb(255, 255, 255);;
+    width: 400px;
+    height:40px;
+    align-items: center;
+    margin: auto;
+    border-radius: 10px;
+}
+
+.favoritesH1NO{
+    text-align: center;
+    background-color:rgba(5, 2, 85, 0.531);
+    color: rgb(255, 255, 255);;
+    width: 550px;
+    height:40px;
+    align-items: center;
+    margin: auto;
+    border-radius: 10px;
+}
+.listCountriesFavorites{
+
+    padding-right: 0px;
+    padding-left: 0px;
+    padding-top: 0px ;
+    float: left;
+    padding-bottom: 0;
+    margin: 15px 0;
+    width: 100%;
+    list-style: none;
+    margin-left: 150px;
+    margin-top: 80px;
+    display: absolute;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.favoritesCountryLi{
+    padding-right: 2px;
+    display: inline;
+    padding-left: 2px;
+    float: left;
+    padding-bottom: 2px;
+    width: 30%;
+    padding-top: 2px;
+}
+.favoriteRemove{
+    width: 30px;
+    height: 25px;
+    font-family: sans-serif;
+    background-color:rgb(201, 0, 0);
+    color: rgb(255, 255, 255);;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    border-radius: 10px;
+    margin-right: 140px;
+    margin-top: -10px;
+    float: right;
+}

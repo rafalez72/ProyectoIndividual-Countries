@@ -1,0 +1,25 @@
+.activityUl{
+    list-style: none;
+    background-color: rgba(5, 2, 85, 0.652);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    width: 235px;
+    height: 250px;
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.activityUl:hover{
+    background-color: rgba(250, 233, 0, 0.587);
+    color:rgb(0, 44, 83)
+}
+.activityLo{
+    display: flex;
+    justify-content:left;
+    width: 80%;
+    height: 120px;
+    font-weight: bolder;
+}

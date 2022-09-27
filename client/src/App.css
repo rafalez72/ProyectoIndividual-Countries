@@ -1,6 +1,4 @@
-.App {
-  text-align: center;
-}
+
 
 .App-logo {
   height: 40vmin;
@@ -23,7 +21,29 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.appH1{
+  color: red;
+}
+.appButtom{
+  width: 100px;
+  height: 30px;
+  font-family: sans-serif;
+  background-color:rgb(5, 2, 85);
+  color: rgb(255, 255, 255);;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+  transition: .3s ease all;
+  border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 15px;
 
+}
+.appButtom:hover{
+  background:rgba(250, 233, 0, 0.587);
+  color: rgb(5, 2, 85);
+}
 .App-link {
   color: #61dafb;
 }

@@ -1,0 +1,64 @@
+.createCountryBody{
+    font-family: sans-serif;
+    padding: 9% 5% 0;
+    background-image:url('https://img.freepik.com/foto-gratis/mapa-mundo-acuarela-blanco-negro_125540-1563.jpg?w=2000');
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    background-size: 100% 100%;
+    background-attachment: fixed;
+    font-family: sans-serif;
+    font-weight:bolder;
+    color: aliceblue;
+
+}
+
+.createCountryForm{
+    font-family: sans-serif;
+    display: flex;
+    text-align:center;
+    align-items: center;
+    flex-direction: column;
+    background-color:rgba(5, 2, 85, 0.449);;
+    width: 400px;
+    height: 450px;
+    border-radius: 10px;
+}
+.createCountryDiv{
+    display: flex;
+    text-align: left;
+    margin-bottom: 5px;
+    
+}
+
+
+.createCountryDivButtom{
+    display: flex;
+
+}
+
+
+
+
+.createCountryButtom{
+    width: 100px;
+    height: 30px;
+    font-family: sans-serif;
+    background-color:rgb(5, 2, 85);
+    color: rgb(255, 255, 255);;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    transition: .3s ease all;
+    border-radius: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.createCountryButtom:hover{
+    background:rgb(255, 255, 255);
+    color: rgb(5, 2, 85);
+}
