@@ -4,12 +4,11 @@ const Op = Sequelize.Op;
 const {Activities, Country, CountryActivities, Favorites }=require('../db');
 const { GetApiAll, GetDbAll } = require('./GetApi');
 const axios=require('axios')
-
+//SI NO ANDA CAMBIA EL CORS
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const router = Router();
-var cors = require('cors')
-router.use(cors())
+
 const getApiInfo=async ()=>{
     const url= await axios.get('https://restcountries.com/v3/all')
      await url.data.forEach(async (element)=>{
