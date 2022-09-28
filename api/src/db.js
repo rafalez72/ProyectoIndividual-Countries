@@ -7,7 +7,7 @@ const { workerData } = require('worker_threads');
 const {DB_USER, DB_PASSWORD, DB_HOST,DB_NAME} = process.env;
 
 let sequelize=
-  process.env.NODE_ENV ==="production"
+  process.env.node_env ==="production"
     ? new Sequelize ({
         database: DB_NAME ,
         dialect:"postgres",
