@@ -16,36 +16,32 @@ function App() {
   }
   
   return (
-
+    
       <BrowserRouter>
         
-          <Switch>     
+        <Switch>   
+          <Route exact path='/' component= {InitialPage}/>
+            <Route exact path='/home' component= {home}/>
+            <Route exact path='/home/:id' component= {CountryDeatil}/>
+            <Route exact path='/favorites' component= {Favourites}/>
+            <Route exact path='/createCountry' component= {CreateCountry}/>
+            <Route exact path='/createActivity' component= {CreateActivity}/>  
           {
                 
                 history.location.pathname!=='/' && history.location.pathname!=='/home' && 
                 history.location.pathname!=='/home/:id' && history.location.pathname!=='/createCountry' && 
                 history.location.pathname!=='/createActivity' && history.location.pathname!=='/favorites'  ? 
-                  <div>
-                    <h1 className='appH1'>The page doesn't exists!</h1>
-                    
-                      <button onClick={(e)=>onHandleClick(e)} className="appButtom">Home</button>
-                   
+                <body className='bodyApp'>
+                  <div className='appH1'>
+                    <h1 >The page doesn't exists!</h1>
+                    <button onClick={(e)=>onHandleClick(e)} className="appButtom">Home</button>
                   </div>
-        
+                </body>
                 :null
                 
     }
-            <Route exact path='/' component= {InitialPage}/>
-            <Route exact path='/home' component= {home}/>
-            <Route exact path='/home/:id' component= {CountryDeatil}/>
-            <Route exact path='/favorites' component= {Favourites}/>
-            <Route exact path='/createCountry' component= {CreateCountry}/>
-            <Route exact path='/createActivity' component= {CreateActivity}/>
-          </Switch>
-    
+      </Switch>
       </BrowserRouter>
-
-  
   );
 }
 //El switch hace que todo vaya de ruta en ruta

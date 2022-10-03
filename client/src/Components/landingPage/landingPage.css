@@ -3,9 +3,14 @@
     display: flex;
     text-align: center;
     justify-content: center;
-    padding: 10px 0 10px;
+    padding: 4px ;
+    height: 35px;
     margin-top: 2%;
-    margin-right: 2%;
+    margin-right: 13%;
+    margin-left: 13%;
+    margin-bottom: 2%;
+    border-radius: 10px;
+    background-color:rgba(5, 2, 85, 0.52); ;
 }
 
 .elementoLista{
@@ -15,8 +20,8 @@
 .botonLista{
     width: 35px;
     background: transparent;
-    color: rgb(5, 2, 85);;
-    font-family:'Courier New', Courier, monospace;
+    color: rgb(255, 255, 255);
+    font-family: sans-serif;
     font-size: 15px;
     border: none;
     cursor: pointer;
@@ -25,6 +30,6 @@
 
 }
 .botonLista:hover{
-    background:rgb(5, 2, 85);
-    color: antiquewhite;
+    background-color: rgba(250, 233, 0, 0.587);
+    color:rgb(0, 44, 83)
 }

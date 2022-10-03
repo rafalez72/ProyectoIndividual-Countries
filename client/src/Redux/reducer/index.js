@@ -22,11 +22,17 @@ const rootReducer=(state=initialState, action)=>{
             return{
                 ...state,
             }
-            case 'GET_COUNTRY_DETAIL':
-                return{
-                    ...state,
-                    country:action.payload
-                }
+        case 'GET_COUNTRY_DETAIL':
+            return{
+                ...state,
+                country:action.payload
+            }
+
+        case 'OUT_COUNTRY_DETAIL':
+            return{
+                ...state,
+                country:{}
+            }
         case 'POST_ACTIVITY':
             return{
                 ...state,

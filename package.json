@@ -2,6 +2,8 @@
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",
-    "download": "^8.0.0"
+    "download": "^8.0.0",
+    "prop-types": "^15.8.1",
+    "react-axios": "^2.0.6"
   }
 }

@@ -3,33 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import {Link} from 'react-router-dom'
 import './favorites.css'
 import Country from "../country/country";
-import { useEffect } from "react";
 import { deleteFavorite, getFavorites } from "../../Redux/actions";
 import SearchBar from "../SearchBar/searchBar";
 import { useState } from "react";
+import { useEffect } from "react";
 export default function Favourites (){
     const [order,setOrder]=useState('')
 
     const allFavorites= useSelector((state)=>state.favorites)
     const dispatch=useDispatch()
-
+    useEffect(()=>{
+        if(!allFavorites.length){
+           dispatch(getFavorites())
+        }
+    })
     const handleDeleteFavorite=(e,name)=>{
-        
         if (window.confirm(`Do you really want to delete ${name} from your favorites?`)){
             e.preventDefault()
             dispatch(deleteFavorite(name))
-            setOrder(`country delete ${name}`)
-        }
-        
+            setOrder(`country delete ${name}, ${order}`)
+        }  
     }
     return(
-        <body className="favoriteBody">
+        <div className="favoriteBody">
             <header className="favoritesHeader">
                 <SearchBar/>
             </header>
             {
                 !allFavorites.length? 
-                <div className="favoritesDiv">
+                <div >
                     <h1 className="favoritesH1NO">Any country in favourites, add one!</h1>
                     <Link to={'/home'}>
                         <button  className="favoritesButtom">Home</button>
@@ -40,15 +42,18 @@ export default function Favourites (){
                     <h1 className="favoritesH1">Favorites countries!</h1>
                     <ul className="listCountriesFavorites">
                         {
+                            
                             allFavorites.map((element,index)=>{
                                 return (
-                                    <Link className="linkHome" to={`/home/${element.id}`}>
-                                        <li className="favoritesCountryLi" key={index}>
-                                             <button className="favoriteRemove" value={element} onClick={(e)=>handleDeleteFavorite(e,element.name)} >X</button>
-                                            <Country name={element.name} img={element.flag_img} continent={element.continent}/>  
-                                        </li>
+                                    <li className="favoritesCountryLi" key={index}>
+                                        <Link className="linkFavorites" to={`/home/${element.id}`}>
+                                            
+                                                    <button className="favoriteRemove" value={element} onClick={(e)=>handleDeleteFavorite(e,element.name)} >X</button>
+                                                <Country name={element.name} img={element.flag_img} continent={element.continent}/>  
+                                            
 
-                                    </Link>
+                                        </Link>
+                                    </li>
                                 )
                             })
                             
@@ -61,7 +66,7 @@ export default function Favourites (){
                 </div>
                 
             }
-        </body>
+        </div>
     )
 
 }

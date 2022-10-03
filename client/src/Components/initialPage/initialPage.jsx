@@ -14,19 +14,16 @@ export default function InitialPage(){
     },[dispatch])  
 
     return (
-        <body className="InitialBackground">
+        <div className="InitialBackground">
             <div className="tittle">
-                <h1>Bienvenidos a la página de países de Henry!</h1>
-                
+                <h1>Welcome to the countries page!</h1>
                 <h4>
                     <Link to={'/home'}>
-                        <button className="buttom"><span>Haz click para acceder</span></button>
+                        <button className="buttom">Click here</button>
                     </Link>
                 </h4>
             </div>
-        </body>
-
-        
+        </div>
     )
 }
 

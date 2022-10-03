@@ -5,20 +5,16 @@
     overflow: hidden;
     height: 100vh;
     display: flex;
-    text-align: center;
     justify-content: center;
     background-size: 100% 100%;
     background-attachment: fixed;
-    font-family: sans-serif;
     font-weight:bolder;
     color: aliceblue;
 
 }
 
 .createCountryForm{
-    font-family: sans-serif;
     display: flex;
-    text-align:center;
     align-items: center;
     flex-direction: column;
     background-color:rgba(5, 2, 85, 0.449);;
@@ -27,25 +23,12 @@
     border-radius: 10px;
 }
 .createCountryDiv{
-    display: flex;
-    text-align: left;
-    margin-bottom: 5px;
-    
+    margin-bottom: 5px;   
 }
-
-
-.createCountryDivButtom{
-    display: flex;
-
-}
-
-
-
 
 .createCountryButtom{
     width: 100px;
     height: 30px;
-    font-family: sans-serif;
     background-color:rgb(5, 2, 85);
     color: rgb(255, 255, 255);;
     font-size: 17px;

@@ -1,35 +1,15 @@
 const { Router } = require('express');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-const {Activities, Country, CountryActivities, Favorites }=require('../db');
-const { GetApiAll, GetDbAll } = require('./GetApi');
-const axios=require('axios')
-//SI NO ANDA CAMBIA EL CORS
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const {Activities, Country, Favorites }=require('../db');
+const { getApiInfo } = require('./GetApi');
+
 const router = Router();
-
-const getApiInfo=async ()=>{
-    const url= await axios.get('https://restcountries.com/v3/all')
-     await url.data.forEach(async (element)=>{
-        
-            await  Country.create({
-                id:element.cca3,
-                name:element.name.common,
-                flag_img:element.flags[1],
-                continent:element.region,
-                capital:!element.capital?'Not capital':element.capital[0],
-                district:element.continents[0],
-                area:element.area + ' km cuadrados',
-                population:element.population
-            })    
-    })
-
-}
-
 router.get('/countries', async (req,res)=>{
     let {name,continent}=req.query
-    let all= await Country.findAll()
+    let all= await Country.findAll({
+        order:[['name','ASC']]
+    })
     try {
         if (!all.length){
             await getApiInfo()
@@ -37,9 +17,7 @@ router.get('/countries', async (req,res)=>{
     } catch (error) {
          res.status(400).send(error)
     }
- //------------------------------------------------------------------------------------------------------------//
- // Busca por nombre si le pasan por query
-     if (name){
+     if (name){       // Busca por nombre si le pasan por query
          name=name.slice(1).toLowerCase()
         try{
             let country=await Country.findAll({
@@ -57,13 +35,7 @@ router.get('/countries', async (req,res)=>{
         }catch(err){
             res.status(400).send(err)
         }
-        } 
-        
-    
- //------------------------------------------------------------------------------------------------------------//
- // Busca por continente si le pasan por query
-
-    else if (continent){
+    } else if (continent){   // Busca por continente si le pasan por query
         continent=continent.slice(1).toLowerCase()
         try{
             let countries=await Country.findAll({
@@ -72,8 +44,7 @@ router.get('/countries', async (req,res)=>{
                         [Op.substring]:continent,
                         
                     }
-                },
-                
+                }, 
             })
             if (countries.length){
                 res.send(countries)
@@ -84,22 +55,19 @@ router.get('/countries', async (req,res)=>{
     } else{
         res.send(all)
     }    
-
 })
 //------------------------------------------------------------------------------------------------------------//
 //En el caso que deba buscar por id del pais
 router.get('/countries/:idPais', async (req,res)=>{
-    let {idPais}=req.params
-    
+    const {idPais}=req.params
     if (idPais){
-        let pk=idPais.toUpperCase()
-        let country=await Country.findOne({
+        const pk=idPais.toUpperCase()
+        const country=await Country.findOne({
             where:{
                 id:[pk]
             },
             include:Activities
         })
-        
         if (country){
             return res.send(country)
         }else return res.status(404).send('The country doesn`t exists')
@@ -113,7 +81,6 @@ router.post('/countries', async (req,res)=>{
     if (payload){
         try {
             if (payload.id && payload.name && payload.flag_img && payload.continent && payload.capital){
-            
                 await Country.create({
                     id:payload.id.toUpperCase(),
                     name:payload.name,
@@ -126,11 +93,9 @@ router.post('/countries', async (req,res)=>{
                 })
                 const country= await Country.findAll()
                 res.send(country)
-
             }else res.status(400).send('El id, el nombre, la bandera, el continente y la capital son datos obligatorios!')
-            
         } catch (error) {
-            res.status(401).send(error.msg)
+            res.status(401).send(error)
         }
     }else if (id){
         try {
@@ -145,10 +110,9 @@ router.post('/countries', async (req,res)=>{
             res.status(400).send(error)
         }
     }
-    
-
 })
-
+//------------------------------------------------------------------------------------------------------------//
+//Lo uso para poder crear una actividad
 router.post('/activities', async (req,res)=>{
     let {payload}=req.body
     if (payload.name){
@@ -167,47 +131,37 @@ router.post('/activities', async (req,res)=>{
                     }
                 })
                 await  activity.addCountry(country.dataValues.id)
-            })
-                
+            })   
             res.send('Actividad creada con exito!!') 
         } catch (error) {  
-            
             res.status(401).send('error')
         }
     }else res.status(400).send('El nombre es obligatorio')
-
 })
+//------------------------------------------------------------------------------------------------------------//
+//Lo uso para pedir todas las actividades 
 router.get('/activities', async (req,res)=>{
     let {name}=req.query
     if (!name){ 
-        let all= await Activities.findAll()
-        try {
-            if (!all.length){
-                                 
-            }else res.send(all)
-        } catch (error) {
-            res.status(400).send(error)
+        const all= await Activities.findAll()
+        if (all.length){
+            res.send(all)               
         }
-    }else{
-        
-        try {
-            let all= await Activities.findOne({
-                where:{
-                    name:[name]
-                },
-                include:Country
-            })
-            if (!all){
-                res.status(401).send('No se creo ninguna actividad')  
-            }else{
-                const countries=all.dataValues.countries
-                res.send(countries)
-            }   
-        }catch(error){
-            res.status(400).send(error)  
+    }else{     
+        const all= await Activities.findOne({
+            where:{
+                name:[name]
+            },
+            include:Country
+        })
+        if (all){
+            const countries=all.dataValues.countries
+            res.send(countries)
         }
     }
 })
+//------------------------------------------------------------------------------------------------------------//
+//Lo uso para agregar a mi base de datos de favoritos y para poder eliminar de la misma
 router.post('/favorites', async (req,res)=>{
     const {name,nameDelete}=req.query
     if (name){
@@ -235,10 +189,9 @@ router.post('/favorites', async (req,res)=>{
                 })
                 const favorite= await Favorites.findAll()
                 res.send(favorite)
-            }else res.send('No repeat countries')
+            }
         } catch (error) {
-            console.log(error)
-            res.status(401).send(error.msg)
+            res.status(401).send(error)
         }
     } else if (nameDelete){
         try {
@@ -250,9 +203,8 @@ router.post('/favorites', async (req,res)=>{
             const favorite= await Favorites.findAll()
             res.send(favorite)
         } catch (error) {
-            res.status(401).send(error.msg)
+            res.status(401).send(error)
         }
-
     } else res.sendStatus(400)
 
 })

@@ -11,7 +11,7 @@ export default function Activity ({name, difficulty,duration, season}){
                <p><h3><u>Difficulty level:</u> </h3>{difficulty}</p>
             </li >
             <li className="activityLo">
-                <p> <h3 ><u>Duration in hours: </u></h3>{duration}</p>
+                <p> <h3 ><u>Duration: </u></h3>{duration}</p>
             </li >
             <li className="activityLo">
                 <p><h3 ><u>Season:</u> </h3>{season}</p>

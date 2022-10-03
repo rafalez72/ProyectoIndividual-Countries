@@ -29,16 +29,14 @@ export default function CreateCountry (){
     const handleClickSubmit=(e)=>{
         e.preventDefault()
         dispatch(postCountry(input))
-        alert('Tu país fue creado, lo veras reflejado en la lista de paises!')
+        alert('Country created!')
         history.push('/home')
     }
     return(
-        <body className="createCountryBody">
+        <div className="createCountryBody">
             <header className="SearchHeader">
-                        <SearchBar/>
+                <SearchBar/>
             </header>
-
-            
             <form className="createCountryForm" onSubmit={(e)=>handleClickSubmit(e)}>
             <h1>Create Country</h1>
                 <label >ID:</label>
@@ -51,7 +49,7 @@ export default function CreateCountry (){
                 </div>
                 <label >PNG Flag(link):</label>
                 <div className="createCountryDiv">
-                    <input required type="url" value={input.flag_img} name='flag_img'  onChange={(e)=>handleChange(e)}/>
+                    <input required type="url" value={input.flag_img} maxLength="254" name='flag_img'  onChange={(e)=>handleChange(e)}/>
                 </div>
                 <label >Continent:</label>
                 <div className="createCountryDiv">  
@@ -73,16 +71,14 @@ export default function CreateCountry (){
                 <div className="createCountryDiv">                   
                     <input type="number" value={input.population} name='population'  onChange={(e)=>handleChange(e)}/>
                 </div>
-                <div className="createCountryDivButtom">
+                <div>
                     <Link to='/home'>
                     <button className="createCountryButtom">Home</button>
                     </Link>
                     <input className="createCountryButtom" type="submit" value='Send'/>
                 </div>
-                
-                
             </form>
-        </body>
+        </div>
     )
 
 }

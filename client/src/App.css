@@ -10,7 +10,15 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+.bodyApp{
+  font-family: sans-serif;
+  padding: 6% 5% 0;
+  background-image:url('https://img.freepik.com/foto-gratis/mapa-mundo-acuarela-blanco-negro_125540-1563.jpg?w=2000');
+  overflow: hidden;
+  height: 100vh;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,9 +30,17 @@
   color: white;
 }
 .appH1{
-  color: red;
+  text-align: center;
+  background-color:rgba(5, 2, 85, 0.531);
+  color: rgb(255, 255, 255);;
+  width: 550px;
+  height:40px;
+  margin: auto;
+  border-radius: 10px;
+  margin-top: 40px;
 }
 .appButtom{
+  
   width: 100px;
   height: 30px;
   font-family: sans-serif;
@@ -35,9 +51,8 @@
   cursor: pointer;
   transition: .3s ease all;
   border-radius: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 15px;
+
+  margin-top: 40px;
 
 }
 .appButtom:hover{

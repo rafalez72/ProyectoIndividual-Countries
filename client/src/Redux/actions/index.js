@@ -29,12 +29,10 @@ export const filterContinentCountries=(value)=> async (dispatch)=>{
 }
 
 export const orderCountries=(payload)=>{
-   
     return {
         type: 'GET_COUNTRIES_ORDER',
         payload:payload,
     }
-
 }
 export const searchCountryByName=(value)=> async (dispatch)=>{
     try {
@@ -81,6 +79,12 @@ export const getCountryDetail=(id)=> async (dispatch)=>{
         console.log(error)
     }
 }
+export const outCountryDetail=()=>{
+        return{
+            type: 'OUT_COUNTRY_DETAIL'
+        }
+
+}
 export const getActivities=()=> async (dispatch)=>{
     try {
         var json= await axios.get(`/activities`)
@@ -119,7 +123,6 @@ export const postCountry=(payload)=> async (dispatch)=>{
 
 export const postActivity=(payload)=> async ()=>{
     try {
-        console.log(payload)
         const json= await axios.post(`/activities`,{payload
         })
         return json

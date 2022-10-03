@@ -1,7 +1,6 @@
 body{
     margin: 0;
     padding: 0;
-   
 }
 .InitialBackground{
     background-image: url('https://dam.ngenespanol.com/wp-content/uploads/2022/04/GettyImages-1176555906.jpg');
@@ -11,11 +10,11 @@ body{
     background-attachment: fixed;
 }
 
-
 .tittle{
     font-size: 120%;
     color: rgb(255, 255, 255);
     text-align: center;
+    font-family: sans-serif;
     position: absolute;
     left: 25%;
     right: 25%;
@@ -24,18 +23,17 @@ body{
 .buttom{
     display: inline flex;
     align-items: center;  /* alineamos de forma vertical  */
-    justify-content:center ; /* alineamos de forma horizontal  */
     width: 55%;
-    background: transparent;
+    background-color: rgba(0, 44, 83, 0.778);
     color: white;
-    font-family:'Courier New', Courier, monospace;
+    font-family: sans-serif;
     font-size: 80%;
     border: none;
     cursor: pointer;
     text-transform: uppercase;
-    transition: .3s ease all;
+    transition: .5s ease all;
     border-radius: 5px;
 }
 .buttom:hover{
-    background:gray ;
+    background:rgba(250, 233, 0, 0.587);
 }

@@ -18,16 +18,9 @@
     left: 0;
 }
 
-.favoritesDiv{
-    display: absolute;
-    align-items: center;
-    justify-content: center;
-}
-.favoritesButtom{
-    
+.favoritesButtom{  
     width: 100px;
     height: 30px;
-    font-family: sans-serif;
     background-color:rgb(5, 2, 85);
     color: rgb(255, 255, 255);;
     font-size: 17px;
@@ -44,37 +37,30 @@
     color: rgb(255, 255, 255);;
     width: 400px;
     height:40px;
-    align-items: center;
     margin: auto;
     border-radius: 10px;
 }
-
+.linkFavorites{
+    text-decoration: none
+}
 .favoritesH1NO{
     text-align: center;
     background-color:rgba(5, 2, 85, 0.531);
     color: rgb(255, 255, 255);;
     width: 550px;
     height:40px;
-    align-items: center;
     margin: auto;
     border-radius: 10px;
 }
 .listCountriesFavorites{
-
     padding-right: 0px;
     padding-left: 0px;
     padding-top: 0px ;
     float: left;
-    padding-bottom: 0;
     margin: 15px 0;
     width: 100%;
     list-style: none;
     margin-left: 150px;
-    margin-top: 80px;
-    display: absolute;
-    align-items: center;
-    justify-content: center;
-
 
 }
 .favoritesCountryLi{
@@ -89,7 +75,6 @@
 .favoriteRemove{
     width: 30px;
     height: 25px;
-    font-family: sans-serif;
     background-color:rgb(201, 0, 0);
     color: rgb(255, 255, 255);;
     font-size: 17px;

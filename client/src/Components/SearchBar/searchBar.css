@@ -13,8 +13,6 @@
     margin-top: 2%;
     margin-right: 2%;
     list-style: none;
-
-
 }
 .navMenuSearch{
     font-size: 100%;
@@ -43,52 +41,6 @@
     color: black;
     transition: 1s;
 }
-.botonBurger{
-    display: none;
-}
-.imagenMenu{
-    width: 20px;
-}
-
-@media (max-width: 768px){
-
-    .logo{
-        width: 15%;
-        padding: 2% 1%;
-        line-height: 60px;
-    
-    }
-    .navMenu{
-        flex-direction: column;
-        margin-top: 0;
-        margin-right: 20 px;
-        background-color: rgb(5, 5, 46);
-        position: fixed;
-        left: 0;
-        top: 60px;
-        width: 100%;
-        align-items: center;
-        padding: 20px 0;
-        height: calc(100%-60px);
-        overflow-y: auto;
-
-        left:  100%;
-        transition: left 0,3s;
-    }
-    .navMenuItem{
-        line-height: 130%;
-    }
-    
-    .botonBurger{
-        background: none;
-        border: none;
-        padding: 0 20px;
-        line-height: 40px;
-        display: block;
-    }
-    .navMenu-visible{
-        left: 0%;
-    }
 
 
 
@@ -96,14 +48,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-}
