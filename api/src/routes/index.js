@@ -5,6 +5,7 @@ const {Activities, Country, Favorites }=require('../db');
 const { getApiInfo, generateRandomString } = require('./GetApi');
 
 const router = Router();
+
 router.get('/countries', async (req,res)=>{
     let {name,continent}=req.query
     let all= await Country.findAll({                                                                    
@@ -12,10 +13,8 @@ router.get('/countries', async (req,res)=>{
     })
     try {
         if (!all.length ){
-            getApiInfo()                        //Para no estar trayendo los datos de la API siempre, pregunto si ya los tengo
-        } else if (all.length<250){             //Puedo tener paises creados, pero al necesitar todos, tengo que tener como minimo los 250 paises de mi API
-            await getApiInfo(all)
-        }
+           await getApiInfo()                    //Para no estar trayendo los datos de la API siempre, pregunto si ya los tengo
+        } 
     } catch (error) {
          res.status(400).send(error)
     }
