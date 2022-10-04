@@ -7,10 +7,10 @@ import { useHistory } from 'react-router-dom'
 export default function Country ({name, img,continent}){
     const history=useHistory()
     const dispatch=useDispatch()
-    const handleFavorite=(e,payload)=>{
+    const handleFavorite=(e,payload)=>{             //Me aseguro que no pueda agregar a favoritos estando en la ventana de favoritos
         e.preventDefault()
         if (history.location.pathname!=='/favorites'){
-            if (window.confirm(`Do you want to add ${payload.name} to favorites? `)){
+            if (window.confirm(`Do you want to add ${payload.name} to favorites? `)){       //Pregunto si quiere agregar, agrego
                 dispatch(addFavorite(payload.name))
             }
         }

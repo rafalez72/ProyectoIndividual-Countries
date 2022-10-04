@@ -14,14 +14,14 @@ export default function Favourites (){
     const dispatch=useDispatch()
     useEffect(()=>{
         if(!allFavorites.length){
-           dispatch(getFavorites())
+           dispatch(getFavorites())                                     //Traigo todos mis favoritos
         }
     })
     const handleDeleteFavorite=(e,name)=>{
         if (window.confirm(`Do you really want to delete ${name} from your favorites?`)){
-            e.preventDefault()
+            e.preventDefault()                                                  //Pregunto si desea eliminarlo, y lo elimino
             dispatch(deleteFavorite(name))
-            setOrder(`country delete ${name}, ${order}`)
+            setOrder(`country delete ${name}, ${order}`)                        //Actualizo el estado para que se vea sin reiniciar la pagina
         }  
     }
     return(
@@ -30,7 +30,7 @@ export default function Favourites (){
                 <SearchBar/>
             </header>
             {
-                !allFavorites.length? 
+                !allFavorites.length?                                           //Si no hay paises en favoritos, pido que agregue
                 <div >
                     <h1 className="favoritesH1NO">Any country in favourites, add one!</h1>
                     <Link to={'/home'}>
@@ -43,7 +43,7 @@ export default function Favourites (){
                     <ul className="listCountriesFavorites">
                         {
                             
-                            allFavorites.map((element,index)=>{
+                            allFavorites.map((element,index)=>{             //Muestro todos mis favoritos
                                 return (
                                     <li className="favoritesCountryLi" key={index}>
                                         <Link className="linkFavorites" to={`/home/${element.id}`}>

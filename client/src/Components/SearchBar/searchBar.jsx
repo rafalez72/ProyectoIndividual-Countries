@@ -12,19 +12,19 @@ export default function SearchBar({onSearch}){
     const [name,setName]=useState('')
     
     const handleInputChange=(e)=>{
-        e.preventDefault()
+        e.preventDefault()                          //Controlo mi estado de busqueda
         setName(e.target.value)
         
     }
     const handleButtonSubmit=(e)=>{
         e.preventDefault()
         if (history.location.pathname==='/home'){
-            if (onSearch){
+            if (onSearch){                                  //Si esta en el home, lo mando a pagina 1
              onSearch(name)
             }
             
         }else{
-            history.push('/home')
+            history.push('/home')                                
             dispatch(searchCountryByName(name))
             
         }

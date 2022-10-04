@@ -16,20 +16,20 @@ export default function Home (){
     const allCountries= useSelector((state)=>state.countries) //invoco mi estado de countries de la carpeta reducer, y lo mando a mi constante
     const allActivities= useSelector((state)=>state.activities)
     const [order,setOrder]=useState('')
-    const [selectAZ,setSelectAZ]=useState('')
-    const [selectPopulation,setSelectPopulation]=useState('')
-    const [selectFilterContinent,setselectFilterContinent]=useState('')
-    const [selectActivities,setselectActivities]=useState('')
+    const [selectAZ,setSelectAZ]=useState('')               //Controlo los  inputs de ordenamiento
+    const [selectPopulation,setSelectPopulation]=useState('')  //Controlo los  inputs de ordenamiento
+    const [selectFilterContinent,setselectFilterContinent]=useState('')  //Controlo los  inputs de ordenamiento
+    const [selectActivities,setselectActivities]=useState('')  //Controlo los  inputs de ordenamiento
     const [currentPage, setCurrentPage]= useState(1)  //en el primero va la pagina local, y otra constante que me setee la pagina local, que siempre tiene que ser uno
     const [countriesPerPage, setCountriesPerPage]=  useState(10) //En otra quiero darle la cantidad de personaje que quiero en mi pagina 
-    const indexOfLastCountry= currentPage * countriesPerPage //
+    const indexOfLastCountry= currentPage * countriesPerPage // 
     const indexOfFirstCountry=indexOfLastCountry - countriesPerPage //
     let currentCountries=allCountries.slice(indexOfFirstCountry,indexOfLastCountry) //Agarro un subArreglo de countries que empiece en el indice del primer country y hasta el ultimo que necesite
     const paginado= (pageNumber)=>{ 
 /*         if (pageNumber===1){
             setCountriesPerPage(9)
             setCurrentPage(1)
-                                            ESTO ES SI QUIERO 9 COUNTRIES EN LA PRIMER
+              ESTO ES SI QUIERO 9 COUNTRIES EN LA PRIMER
         }else {
             setCountriesPerPage(10)
             setCurrentPage(pageNumber)
@@ -39,7 +39,7 @@ export default function Home (){
     }
     
     useEffect(()=>{
-        if (!allCountries.length){
+        if (!allCountries.length || allCountries.length<250){
             dispatch(getCountries())
             setCurrentPage(1) //Uso mi useEffect para traer mis countries, cuando el componente se MONTA. Es lo   mismo que hacer mapDispatchToProps, pero mas sencillo  
         }
@@ -57,7 +57,7 @@ export default function Home (){
     }
     const onSearch=(name)=>{
         dispatch(searchCountryByName(name))
-        setCurrentPage(1)
+        setCurrentPage(1)                                      //Busco por nombre y devuelvo a la pagina 1
     } 
     const handleClickActivities=(e)=>{
         
@@ -65,7 +65,7 @@ export default function Home (){
         if (e.target.value==='todos') dispatch(getCountries())
         else {
             dispatch(getActivitiesByName(e.target.value))
-            setCurrentPage(1)
+            setCurrentPage(1)                                       //Al hacer click, pongo en el estado normal todos filtros
             setselectActivities(e.target.value)
             setSelectPopulation('todos')
             setSelectAZ('todos')
@@ -77,7 +77,7 @@ export default function Home (){
         e.preventDefault()
         if (e.target.value==='todos') dispatch(getCountries())
         else  {
-            dispatch(filterContinentCountries(e.target.value)) 
+            dispatch(filterContinentCountries(e.target.value)) //Al hacer click, pongo en el estado normal todos filtros
             setCurrentPage(1)
             setselectFilterContinent(e.target.value)
             setSelectPopulation('todos')
@@ -94,7 +94,7 @@ export default function Home (){
             setCurrentPage(1)
             setOrder(`Order by ${e.target.value}`)
             if (e.target.value==='a-z' || e.target.value==='z-a'){
-                setSelectAZ(e.target.value)
+                setSelectAZ(e.target.value)                                 //veo que metodo de ordenamiento me pide y le doy
                 setSelectPopulation('todos')
             }else {
                 setSelectPopulation(e.target.value)
@@ -106,7 +106,7 @@ export default function Home (){
     const handleDelete=(e,element)=>{
         e.preventDefault()
         if (window.confirm(`Do you really want to delete ${element.name} ?`)){
-            dispatch (deleteCountry(element.id))
+            dispatch (deleteCountry(element.id))                            //Veo si quiere elimianr un pais y lo elimino
             setCurrentPage(1)
             setOrder(`Order by ${element.name} ,${order}`)
         }
@@ -148,7 +148,7 @@ export default function Home (){
                 })
             }
         </select>
-        <Suspense fallback={<img src="https://acegif.com/wp-content/uploads/loading-25.gif" alt="loading"/> }>
+        <Suspense fallback={<img src="https://acegif.com/wp-content/uploads/loading-25.gif" alt="loading"/> }>      
             <ul className="listCountriesHome">
            
                 {

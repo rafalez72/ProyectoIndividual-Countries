@@ -13,25 +13,27 @@ export default  function CreateActivity (){
         name:'',
         difficulty_level:'',
         duration:'',
-        season:'',
+        season:'',                                      
         countryName:[]
     })
        
     const allCountries=useSelector((state)=>state.countries)
     useEffect(()=>{
-           dispatch(getCountries())      
+            if (allCountries.length<250){
+                dispatch(getCountries())    //Si tengo menos de los paises los traigo
+            }
     },[dispatch,allCountries.length])  
     
     const handleChange=(e)=>{
         setInput({
             ...input,
-            [e.target.name]:e.target.value,
+            [e.target.name]:e.target.value,                 //Controlo el estado de mis inputs
         })
     }
     const handleChangeCountry=(e)=>{
         if (!input.countryName.includes(e.target.value) && e.target.value!=='Choose'){
             setInput({
-                ...input,
+                ...input,                                                           //Controlo los paises elegidos
                 countryName:[...input.countryName,e.target.value]
             })
         }
@@ -39,14 +41,14 @@ export default  function CreateActivity (){
     const handleDeleteCountry=(e)=>{
         e.preventDefault()
         setInput({
-            ...input,
+            ...input,                                                               //Elimino si quiere sacar algun pais de los elegidos
             countryName:input.countryName.filter(el=>el!==e.target.value)
         })
     }
     const handleClickSubmit=(e)=>{
         e.preventDefault()
         dispatch(postActivity(input))
-        alert('Activity created!')
+        alert('Activity created!')                                                   //Confirmo que se crea la actividad, y hago que vuelva al home
         history.push('/home')
     }
      
@@ -84,7 +86,7 @@ export default  function CreateActivity (){
                 <div>
                     <select required name='countryName' defaultValue='choose' onChange={(e)=>handleChangeCountry(e)}  >
                         <option value='choose' disabled  >Choose</option>
-                        {allCountries.map((element,index )=> {
+                        {allCountries.map((element,index )=> {      //Traigo todos los paises y los muestro coomo opcion
                             return(<option key={index} value={element.name} >{element.name}</option>)
                         })}
                     </select>                               
@@ -104,9 +106,9 @@ export default  function CreateActivity (){
             {input.countryName.map((e,index)=>{
                     const find=allCountries.find(element=>element.name===e)
                     return(
-
+                                                                            //Muestro todos los paises que va agregando
                         <li className="createActivityCountryLi" key={index} >
-                                <Country name={find.name} img={find.flag_img} continent={find.continent} />
+                                <Country name={find.name} img={find.flag_img} continent={find.continent} />     
                                 <button className="createActivityRemove" value={e} onClick={e=>handleDeleteCountry(e)}>X</button>
                         </li>
                     )

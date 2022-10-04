@@ -15,7 +15,7 @@ export default function CreateCountry (){
         name:'',
         flag_img:'',
         continent:'',
-        capital:'',
+        capital:'',                                             //Controlo los inputs
         district:'',
         area:'',
         population:''
@@ -28,7 +28,7 @@ export default function CreateCountry (){
     }
     const handleClickSubmit=(e)=>{
         e.preventDefault()
-        dispatch(postCountry(input))
+        dispatch(postCountry(input))            //Al hacer click en enviar, lo guardo ya aviso que los guarde
         alert('Country created!')
         history.push('/home')
     }

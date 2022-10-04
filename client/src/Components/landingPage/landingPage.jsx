@@ -17,8 +17,9 @@ export default function Paginado({countriesPerPage, allCountries, paginado}){
             {
                 pageNumbers &&
                 pageNumbers.map((number,index)=>{    
+                    //Muestro el paginado e invoco a la funcion que cambia de pagina
                     return(     
-                        <li className="elementoLista" key={index}>
+                        <li className="elementoLista" key={index}>     
                             <button className="botonLista" onClick={()=> paginado(number) }>{number}</button>
                         </li>
                     )

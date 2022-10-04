@@ -7,37 +7,37 @@ const { getApiInfo, generateRandomString } = require('./GetApi');
 const router = Router();
 router.get('/countries', async (req,res)=>{
     let {name,continent}=req.query
-    let all= await Country.findAll({
-        order:[['name','ASC']]
+    let all= await Country.findAll({                                                                    
+        order:[['name','ASC']]                  //Traigo todos los paises de mi API y los guardo para poder usarlos
     })
     try {
         if (!all.length ){
-            getApiInfo()
-        } else if (all.length<250){
+            getApiInfo()                        //Para no estar trayendo los datos de la API siempre, pregunto si ya los tengo
+        } else if (all.length<250){             //Puedo tener paises creados, pero al necesitar todos, tengo que tener como minimo los 250 paises de mi API
             await getApiInfo(all)
         }
     } catch (error) {
          res.status(400).send(error)
     }
      if (name){       // Busca por nombre si le pasan por query
-         name=name.slice(1).toLowerCase()
-         if (name.includes(' ')){
-            name=name.split(' ')
+         name=name.slice(1).toLowerCase()       //Saco el primer caracter por que en mi base de datos esta con mayuscula
+         if (name.includes(' ')){               
+            name=name.split(' ')                                    
             for (let i=1; i<name.length;i++){
-               name[i]=name[i][0].toUpperCase()+name[i].slice(1)
+               name[i]=name[i][0].toUpperCase()+name[i].slice(1)        //Pongo el primer caracter de las segundas palabras en mayuscula para buscar 
             }
            name=name.toString().replace(',',' ')
          }
         try{
             let country=await Country.findAll({
                 where:{
-                    name:{
+                    name:{                                              //Busco en mi base de datos el pais que coincida con el substring creado
                         [Op.substring]:name
                     }
                 }
             })
             if (country.length){
-                res.send(country)
+                res.send(country)                                       //Si existe lo mando, sino, mando que un mensaje adecuado
             }else {
                 res.status(400).send('Any country with that name')
             }
@@ -47,8 +47,8 @@ router.get('/countries', async (req,res)=>{
     } else if (continent){   // Busca por continente si le pasan por query
         continent=continent.slice(1).toLowerCase()
         try{
-            let countries=await Country.findAll({
-                where:{
+            let countries=await Country.findAll({                                       
+                where:{                                         //La misma manera que para buscar por nombre
                     continent:{
                         [Op.substring]:continent,
                         
@@ -73,7 +73,7 @@ router.get('/countries/:idPais', async (req,res)=>{
         const pk=idPais.toUpperCase()
         const country=await Country.findOne({
             where:{
-                id:[pk]
+                id:[pk]                                             //Busco un unico pais que coincida con el id por que es unico
             },
             include:Activities
         })
@@ -89,33 +89,33 @@ router.post('/countries', async (req,res)=>{
     const {payload}=req.body
     if (payload){
         try {
-            if (payload.id && payload.name && payload.flag_img && payload.continent && payload.capital){
+            if (payload.id && payload.name && payload.flag_img && payload.continent && payload.capital){    //Me fijo que los datos indispensables sean pasados
                 let id=payload.id
                 let selectId= await Country.findOne({
-                    where:{
+                    where:{                                                                                 //Me fijo si el id pasado coincide con alguna en la BD
                         id:[id]
                     }
                 })
                 while (selectId!==null){
                      id= generateRandomString()
-                     selectId= await Country.findOne({
+                     selectId= await Country.findOne({                                                      //Si coincide, genero uno nuevo al azar, hasta que no coincida
                         where:{
                             id:[id]
                         }
                     })
                 }
-              let c=  await Country.create({
+                await Country.create({
                     id:id.toUpperCase(),
                     name:payload.name,
                     flag_img:payload.flag_img,
-                    continent:payload.continent,
+                    continent:payload.continent,                                                                //Creo mi nuevo pais
                     capital:payload.capital,
                     district:!payload.district?'not data':payload.district,
                     area:!payload.area?'not data':payload.area,
                     population:!payload.population?'not data':payload.population,
                 })
                 const country= await Country.findAll()
-                res.send(country)
+                res.send(country)                                                                              //Busco todos, incluyendo el que cree, y los devuelvo para agilizar 
             }else res.status(400).send('El id, el nombre, la bandera, el continente y la capital son datos obligatorios!')
         } catch (error) {
             res.status(401).send(error)
@@ -123,7 +123,7 @@ router.post('/countries', async (req,res)=>{
     }else if (id){
         try {
             await Country.destroy({
-                where:{
+                where:{                                                   //Cuando me pasan el id, lo destruyo y busco todos para agilizar
                     id:[id]
                 }
             })
@@ -138,22 +138,22 @@ router.post('/countries', async (req,res)=>{
 //Lo uso para poder crear una actividad
 router.post('/activities', async (req,res)=>{
     let {payload}=req.body
-    if (payload.name){
+    if (payload.name){                                                                  //Verifico que exista el dato indispensable
         try {
             const activity= await Activities.create({
                 name:payload.name,
-                difficulty_level:!payload.difficulty_level?1:payload.difficulty_level,
+                difficulty_level:!payload.difficulty_level?1:payload.difficulty_level,              
                 duration:!payload.duration?'not data':payload.duration,
-                season:!payload.season?'not data':payload.season,
+                season:!payload.season?'not data':payload.season,                                       
             })
             
            await payload.countryName.forEach(async e=>{
                 const country= await Country.findOne({
-                    where:{
+                    where:{                                                            //Busco los paises que coincidad con la actividad
                         name:[e]
                     }
                 })
-                await  activity.addCountry(country.dataValues.id)
+                await  activity.addCountry(country.dataValues.id)                      //Los agrego en la tabla intermedia de CountryActivities
             })   
             res.send('Actividad creada con exito!!') 
         } catch (error) {  
@@ -169,8 +169,8 @@ router.get('/activities', async (req,res)=>{
         const all= await Activities.findAll()
         if (all.length){
             res.send(all)               
-        }
-    }else{     
+        }       
+    }else{                                              //Si me pasan un nombre la traigo, sino busco todas
         const all= await Activities.findOne({
             where:{
                 name:[name]
@@ -178,7 +178,7 @@ router.get('/activities', async (req,res)=>{
             include:Country
         })
         if (all){
-            const countries=all.dataValues.countries
+            const countries=all.dataValues.countries    //Devuelvo todos los paises asociados
             res.send(countries)
         }
     }
@@ -198,7 +198,7 @@ router.post('/favorites', async (req,res)=>{
                 where:{
                     name:[name]
                 }
-            })
+            })                                                          //Busco el pais que me pasan, verifico que no este en favoritos para evitar duplicados y si no esta, lo agrego
             if (!favorite){
                 await Favorites.create({
                     id:country.dataValues.id.toUpperCase(),
@@ -210,7 +210,7 @@ router.post('/favorites', async (req,res)=>{
                     area:!country.dataValues.area?'not data':country.dataValues.area,
                     population:!country.dataValues.population?'not data':country.dataValues.population,
                 })
-                const favorite= await Favorites.findAll()
+                const favorite= await Favorites.findAll()               //Devuelvo todos para agilizar
                 res.send(favorite)
             }
         } catch (error) {
@@ -221,7 +221,7 @@ router.post('/favorites', async (req,res)=>{
             await Favorites.destroy({
                 where:{
                     name:[nameDelete]
-                }
+                }                                               //lo saco de favoritos
             })
             const favorite= await Favorites.findAll()
             res.send(favorite)
@@ -235,7 +235,7 @@ router.get('/favorites', async (req,res)=>{
     const favorites= await Favorites.findAll()
     try{
         if (favorites.length){
-            res.send(favorites)
+            res.send(favorites)                                 //Traigo todos mis favoritos
         }
     }catch(error){
         res.sendStatus(400)

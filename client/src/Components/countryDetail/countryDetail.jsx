@@ -10,9 +10,9 @@ export default function CountryDeatil(props){
 
     const dispatch=useDispatch()
     useEffect(()=>{
-        dispatch(getCountryDetail(props.match.params.id))  //De esta manera accedo al id que esta en params(link)
-        return (()=> dispatch(outCountryDetail()))
-    },[dispatch,props.match.params.id])
+        dispatch(getCountryDetail(props.match.params.id))  //Acceso por params al id, y lo busco en mi BD
+        return (()=> dispatch(outCountryDetail()))         // Al salir, borro mi estado de detalle asi, no tarda en cargar al entrar denuevo
+    },[dispatch,props.match.params.id]) 
 
 
 
