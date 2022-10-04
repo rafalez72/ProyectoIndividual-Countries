@@ -39,8 +39,12 @@
     position: relative;
     transition: all 0.25s ease;
 }
+.homeSelectBottom{
+    background:  rgba(5, 2, 85, 0.722);
+}
 .homeSelectBottom:hover{
 	background: rgba(250, 233, 0, 0.785);
+    color:rgb(5, 2, 85); ;
     
 }
 .listCountriesHome{

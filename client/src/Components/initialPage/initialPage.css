@@ -21,7 +21,6 @@ body{
     top: 30%;
 }
 .buttom{
-    display: inline flex;
     align-items: center;  /* alineamos de forma vertical  */
     width: 55%;
     background-color: rgba(0, 44, 83, 0.778);

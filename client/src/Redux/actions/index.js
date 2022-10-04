@@ -36,6 +36,7 @@ export const orderCountries=(payload)=>{
 }
 export const searchCountryByName=(value)=> async (dispatch)=>{
     try {
+         
         var json= await axios.get(`/countries?name=${value}`)
         return dispatch({
             type: 'GET_COUNTRY_NAME',

@@ -2,7 +2,7 @@ const { Router } = require('express');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const {Activities, Country, Favorites }=require('../db');
-const { getApiInfo } = require('./GetApi');
+const { getApiInfo, generateRandomString } = require('./GetApi');
 
 const router = Router();
 router.get('/countries', async (req,res)=>{
@@ -11,14 +11,23 @@ router.get('/countries', async (req,res)=>{
         order:[['name','ASC']]
     })
     try {
-        if (!all.length){
-            await getApiInfo()
-        } 
+        if (!all.length ){
+            getApiInfo()
+        } else if (all.length<250){
+            await getApiInfo(all)
+        }
     } catch (error) {
          res.status(400).send(error)
     }
      if (name){       // Busca por nombre si le pasan por query
          name=name.slice(1).toLowerCase()
+         if (name.includes(' ')){
+            name=name.split(' ')
+            for (let i=1; i<name.length;i++){
+               name[i]=name[i][0].toUpperCase()+name[i].slice(1)
+            }
+           name=name.toString().replace(',',' ')
+         }
         try{
             let country=await Country.findAll({
                 where:{
@@ -81,8 +90,22 @@ router.post('/countries', async (req,res)=>{
     if (payload){
         try {
             if (payload.id && payload.name && payload.flag_img && payload.continent && payload.capital){
-                await Country.create({
-                    id:payload.id.toUpperCase(),
+                let id=payload.id
+                let selectId= await Country.findOne({
+                    where:{
+                        id:[id]
+                    }
+                })
+                while (selectId!==null){
+                     id= generateRandomString()
+                     selectId= await Country.findOne({
+                        where:{
+                            id:[id]
+                        }
+                    })
+                }
+              let c=  await Country.create({
+                    id:id.toUpperCase(),
                     name:payload.name,
                     flag_img:payload.flag_img,
                     continent:payload.continent,

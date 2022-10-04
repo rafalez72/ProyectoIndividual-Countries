@@ -2,7 +2,7 @@ import React from "react";
 import './home.css'
 import { useState, useEffect, Suspense, lazy } from "react";
 import {useDispatch, useSelector} from 'react-redux'
-import {deleteCountry, filterContinentCountries, getActivities,getActivitiesByName, getCountries, orderCountries } from "../../Redux/actions";
+import {deleteCountry, filterContinentCountries, getActivities,getActivitiesByName, getCountries, orderCountries, searchCountryByName } from "../../Redux/actions";
 import {Link} from 'react-router-dom'
 import Paginado from "../landingPage/landingPage";
 import SearchBar from "../SearchBar/searchBar";
@@ -37,7 +37,7 @@ export default function Home (){
         setCountriesPerPage(10)
         setCurrentPage(pageNumber)
     }
-
+    
     useEffect(()=>{
         if (!allCountries.length){
             dispatch(getCountries())
@@ -55,7 +55,10 @@ export default function Home (){
         setselectFilterContinent('todos')
         setselectActivities('todos')
     }
-     
+    const onSearch=(name)=>{
+        dispatch(searchCountryByName(name))
+        setCurrentPage(1)
+    } 
     const handleClickActivities=(e)=>{
         
         e.preventDefault()  
@@ -112,7 +115,7 @@ export default function Home (){
     return(
     <div className="homeBody">
         <header className="SearchHeader">
-                <SearchBar/>
+                <SearchBar onSearch={onSearch}/>
         </header>
                
         <select className="homeSelect" value={selectPopulation}onChange={(e)=>handleOrder(e)}>
@@ -125,7 +128,7 @@ export default function Home (){
             <option value='a-z'>A-Z</option>       
             <option value='z-a'>Z-A</option>  
         </select>
-        <button  className="homeSelect homeSelectBottom" onClick={e=>{handleClick(e)}}>All countries</button>
+        <button  className="homeSelect homeSelectBottom" onClick={e=>{handleClick(e)}}>Show all countries</button>
         <select className="homeSelect" value={selectFilterContinent} onChange={(e)=>handleFilterContinent(e)}>
             <option value='todos'>Filter by continent</option>
             <option value='America'>Americas</option>

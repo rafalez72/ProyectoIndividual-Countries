@@ -6,7 +6,7 @@ import {Link, useHistory} from 'react-router-dom'
 import { searchCountryByName } from '../../Redux/actions';
 
 
-export default function SearchBar(){
+export default function SearchBar({onSearch}){
     const history=useHistory()
     const dispatch=useDispatch()
     const [name,setName]=useState('')
@@ -17,13 +17,18 @@ export default function SearchBar(){
         
     }
     const handleButtonSubmit=(e)=>{
-        if (history.location.pathname!=='/home'){
-             history.push('/home')
-        }
         e.preventDefault()
-        dispatch(searchCountryByName(name))
+        if (history.location.pathname==='/home'){
+            if (onSearch){
+             onSearch(name)
+            }
+            
+        }else{
+            history.push('/home')
+            dispatch(searchCountryByName(name))
+            
+        }
         setName('')
-
     }
     return(
         <nav className='navSearch'>  
